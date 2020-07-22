@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-lista/ordem-servico-lista.component';
 import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lista.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 
 
 @NgModule({
