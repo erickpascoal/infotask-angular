@@ -1,0 +1,44 @@
+<div class="header-lista">
+    <select [(ngModel)]="rowsPerPage" (change)="setRowsPerPage()" title="Registros por página">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+    <input [(ngModel)]="search" (keyup.enter)="onEnterSearch()" type="text" placeholder="Pesquisa">
+    <button (click)="onEnterSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
+</div>
+
+<div class="list">
+    <div class="header-column">
+        <div class="header-column" *ngFor="let columnHead of listaConfig.columns"
+            (click)="onClickHeaderColumn(columnHead)">
+            <strong> {{ columnHead.title }} </strong>
+            <!-- <i *ngIf="!verificaColunaOrdenada(columnHead)" class="fa fa-arrow-up header-icon-order"></i>
+            <i *ngIf="verificaColunaOrdenada(columnHead)" class="fa fa-arrow-down header-icon-order"></i> -->
+
+        </div>
+        <div class="action-header">
+            <strong> Ações</strong>
+        </div>
+
+    </div>
+    <a *ngFor="let dado of dados">
+        <div class="content-column" *ngFor="let columnHead of listaConfig.columns">
+            <p>{{buildValue(dado, columnHead,  columnHead.property)}}</p>
+        </div>
+        <div class="action-row">
+            <div *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)">
+                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="pagination">
+    <a [ngClass]="{ 'invisible' : listaConfig.page == 1 }" (click)="onClickPreviusPage()">&laquo;</a>
+    <a *ngFor="let page of getPages()" [ngClass]="{'active': page == listaConfig.page}"
+        (click)="setPage(page)">{{page}}</a>
+    <a [ngClass]="{ 'invisible' : listaConfig.page == totalPages || listaConfig.countData == 0 }"
+        (click)="onClickNextPage()">&raquo;</a>
+</div>

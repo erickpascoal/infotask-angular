@@ -1,0 +1,42 @@
+<div class="header-table">
+    <input [(ngModel)]="search" (keyup.enter)="onEnterSearch()" type="text" placeholder="Pesquisa">
+    <select [(ngModel)]="rowsPerPage" (change)="setRowsPerPage()" title="Registros por página">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+</div>
+<table class="customers">
+    <thead>
+        <tr>
+            <th class="column" width="{{columnHead.width}}" *ngFor="let columnHead of tableConfig.columns"
+                (click)="onClickHeaderColumn(columnHead)">
+                {{ columnHead.title }}</th>
+            <th class="actions" *ngIf="tableConfig.rowActions.length > 0">
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let columnData of tableContent">
+            <td *ngFor="let columnHead of tableConfig.columns">
+                {{buildValue(columnData, columnHead,  columnHead.property)}}
+            </td>
+            <td class="td-actions">
+                <div class="button-row" *ngFor="let action of tableConfig.rowActions"
+                    (click)="onRowActionClicked(action.action, columnData)">
+                    <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <a [ngClass]="{ 'invisible' : tableConfig.page == 1 }" (click)="onClickPreviusPage()">&laquo;</a>
+    <a *ngFor="let page of getPages()" [ngClass]="{'active': page == tableConfig.page}"
+        (click)="setPage(page)">{{page}}</a>
+    <a [ngClass]="{ 'invisible' : tableConfig.page == totalPages || tableConfig.countData == 0 }"
+        (click)="onClickNextPage()">&raquo;</a>
+</div>
