@@ -1,7 +1,8 @@
-import { environment } from './../environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-lista/ordem-servico-lista.component';
 import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lista.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
 
 @NgModule({
@@ -18,6 +21,7 @@ import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lis
     DateFormatPipe,
     OrdemServicoListaComponent,
     ClienteListaComponent,
+    MenuBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,8 @@ import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lis
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
