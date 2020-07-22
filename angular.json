@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "infotask"
+    }
+  },
+  "defaultProject": "infotask",
+  "cli": {
+    "analytics": "884c9fc9-ced7-4f24-a766-06c64c064bdf"
+  }
 }

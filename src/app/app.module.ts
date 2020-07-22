@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-lista/ordem-servico-lista.component';
+import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lista.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-
     AppComponent,
     DateFormatPipe,
     OrdemServicoListaComponent,
+    ClienteListaComponent,
   ],
   imports: [
     BrowserModule,

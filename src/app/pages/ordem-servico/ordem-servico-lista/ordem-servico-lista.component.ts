@@ -14,6 +14,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
   totalOrdemServicos: number;
   openModalForm = false;
   ordemServicoSelected;
+
   public tableConfig = {
     columns: [
       { title: "Número", property: "numero", width: 'auto', type: 'string' },
@@ -65,6 +66,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+    console.log(rowAction)
   }
 
   closeOrdemServicoForm() {
