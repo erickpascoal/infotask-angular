@@ -11,7 +11,7 @@
 
 <div class="list">
     <div class="header-column">
-        <div class="header-column" *ngFor="let columnHead of listaConfig.columns"
+        <div class="header-column " *ngFor="let columnHead of listaConfig.columns"
             (click)="onClickHeaderColumn(columnHead)">
             <strong> {{ columnHead.title }} </strong>
             <!-- <i *ngIf="!verificaColunaOrdenada(columnHead)" class="fa fa-arrow-up header-icon-order"></i>

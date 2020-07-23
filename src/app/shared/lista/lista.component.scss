@@ -85,7 +85,7 @@
             background-color: #fff;
             border-radius: 5px;
             width: 100%;
-            padding: 15px;
+            padding: 10px 5px 2px 5px;
             text-decoration: none;
             transition: transform 0.2s;
             cursor: default;
@@ -110,7 +110,7 @@
         margin: 0 16px;
             p {
                 font-size: 18px;
-                color: #a8a8b3;
+                color: #737375;
                 margin-top: 4px;
             }
         }
@@ -122,7 +122,7 @@
         background-color: #fff;
         border-radius: 5px 5px 0  0;
         width: 100%;
-        padding: 10px;
+        padding: 7px;
         text-decoration: none;
         transition: transform 0.2s;
         margin-bottom: 5px;
@@ -130,7 +130,7 @@
 
        div {
             strong {
-                font-size: 20px;
+                font-size: 18px;
                 color: #3a3a3a;
             }
        }
@@ -170,6 +170,4 @@
             margin: 0 8px;
         }
     }
-
-
   }
