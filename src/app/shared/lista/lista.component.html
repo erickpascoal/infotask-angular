@@ -10,24 +10,22 @@
 </div>
 
 <div class="list">
-    <div class="header-column">
-        <div class="header-column " *ngFor="let columnHead of listaConfig.columns"
+    <a>
+        <div class="header-column" *ngFor="let columnHead of listaConfig.columns"
             (click)="onClickHeaderColumn(columnHead)">
-            <strong> {{ columnHead.title }} </strong>
+            <p> {{ columnHead.title }} </p>
             <!-- <i *ngIf="!verificaColunaOrdenada(columnHead)" class="fa fa-arrow-up header-icon-order"></i>
             <i *ngIf="verificaColunaOrdenada(columnHead)" class="fa fa-arrow-down header-icon-order"></i> -->
-
         </div>
         <div class="action-header">
-            <strong> Ações</strong>
+            <p> Ações</p>
         </div>
-
-    </div>
+    </a>
     <a *ngFor="let dado of dados">
         <div class="content-column" *ngFor="let columnHead of listaConfig.columns">
             <p>{{buildValue(dado, columnHead,  columnHead.property)}}</p>
         </div>
-        <div class="action-row">
+        <div class="action-content">
             <div *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)">
                 <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
             </div>
