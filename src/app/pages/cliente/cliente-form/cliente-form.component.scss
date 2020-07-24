@@ -1,23 +1,42 @@
-fieldset {
-  margin: 64px auto;
-  padding: 0 75px;
-  border: 0;
-  max-width: 960px;
+h2 {
+  text-align: center;
+  color: #4e4e4e;
+}
 
-  h2 {
-    font-size: 24px;
-  }
+fieldset {
+  margin-top: 10px;
+  padding: 0 50px;
+  border: 0;
+
+    mat-form-field mat-label {
+      font-size: 0.8rem;
+    }
+
+    mat-form-field.nome-cliente,
+    .contato mat-form-field {
+      width: 310px;
+    }
+
 
   .field-group {
     width: auto;
     display: flex;
 
-    .nome-cliente {
-      width: 650px;
-    }
-
     p + p {
-      margin-left: 24px;
+      margin-left: 16px;
     }
   }
+}
+
+mat-dialog-actions button {
+  background-color: #3f51b5;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  margin: 8px;
+  padding: 8px 16px;
+}
+
+mat-dialog-actions button + button {
+  margin-right: 50px;
 }

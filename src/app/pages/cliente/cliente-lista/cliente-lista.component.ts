@@ -95,7 +95,11 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   openModalCreate() {
     this.clienteSelected = null;
-    const dialogRef = this.dialog.open(ClienteFormComponent);
+    const dialogRef = this.dialog.open(ClienteFormComponent, {
+      data: {
+        nome: 'Erick'
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
