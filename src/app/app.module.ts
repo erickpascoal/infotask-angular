@@ -5,16 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
-
 import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lista.component';
 import { ClienteFormComponent } from './pages/cliente/cliente-form/cliente-form.component';
 import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-lista/ordem-servico-lista.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
