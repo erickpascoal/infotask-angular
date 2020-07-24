@@ -15,7 +15,9 @@ import { OrdemServicoListaComponent } from './pages/ordem-servico/ordem-servico-
 import { ClienteListaComponent } from './pages/cliente/cliente-lista/cliente-lista.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { ClienteFormComponent } from './pages/cliente/cliente-form/cliente-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
     OrdemServicoListaComponent,
     ClienteListaComponent,
     MenuBarComponent,
+    ClienteFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,9 @@ import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

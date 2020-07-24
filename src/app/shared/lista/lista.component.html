@@ -1,3 +1,5 @@
+<button *ngIf="listaConfig.createButton" class="button-create" (click)="sendCreateActionEmmiter()"><i class="fa fa-plus"
+        aria-hidden="true"></i></button>
 <div class="header-lista">
     <select [(ngModel)]="rowsPerPage" (change)="setRowsPerPage()" title="Registros por página">
         <option value="10">10</option>
@@ -6,8 +8,9 @@
         <option value="100">100</option>
     </select>
     <input [(ngModel)]="search" (keyup.enter)="onEnterSearch()" type="text" placeholder="Pesquisa">
-    <button (click)="onEnterSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <button class="button-find" (click)="onEnterSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
 </div>
+
 
 <div class="list">
     <a>

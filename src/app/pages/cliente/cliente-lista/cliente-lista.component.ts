@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import { WebsocketService } from './../../../websocket.service';
-
 import { ClienteService } from '../cliente.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -15,8 +15,7 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   clientes: any = [];
   totalClientes: number;
-  openModalForm = false;
-	clienteSelected;
+  clienteSelected;
 
   public tableConfig = {
     columns: [
@@ -30,12 +29,17 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     ],
     rowsPerPage: 5,
     page: 1,
-		countData: 0
+    countData: 0,
+    createButton: true
   }
 
   private _socketSubscribe: Subscription;
 
-  constructor(private clienteService: ClienteService, private websocketService: WebsocketService) {}
+  constructor(
+    private clienteService: ClienteService,
+    private websocketService: WebsocketService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.loadClientes();
@@ -60,7 +64,7 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   }
 
   public handleAction(rowAction) {
-    switch(rowAction.action) {
+    switch (rowAction.action) {
       case 'edit':
         this.openEditarCadastro(rowAction.rowData);
         break;
@@ -71,8 +75,8 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   }
 
   public atualizarListaClientes(event) {
-    if(event) {
-      switch(event.action) {
+    if (event) {
+      switch (event.action) {
         case 'create':
           this.clientes.unshift(event.cliente);
           break;
@@ -88,18 +92,17 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     }
   }
 
-  openCadastroCliente() {
+  openModalCreate() {
     this.clienteSelected = null;
-    this.openModalForm = true;
-  }
+    const dialogRef = this.dialog.open(ClienteFormComponent);
 
-  closeClienteForm() {
-    this.openModalForm = false;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   openEditarCadastro(cliente) {
     this.clienteSelected = cliente;
-    this.openModalForm = true;
   }
 
   openModalDeletarCliente(cliente) {

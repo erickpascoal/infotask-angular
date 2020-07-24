@@ -23,6 +23,9 @@ export class ListaComponent implements OnInit {
   @Output()
   public queryEmmiter = new EventEmitter();
 
+  @Output()
+  public createActionEmmiter = new EventEmitter();
+
   public pageList: number[];
 
   public search: string;
@@ -122,5 +125,9 @@ export class ListaComponent implements OnInit {
 
   public verificaColunaOrdenada(coluna) {
     return coluna == this.listaConfig.columnSort && this.listaConfig.columnSort.sortDir == 'asc';
+  }
+
+  public sendCreateActionEmmiter() {
+    this.createActionEmmiter.emit();
   }
 }
