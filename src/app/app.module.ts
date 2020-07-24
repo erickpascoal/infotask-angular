@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClienteFormComponent } from './pages/cliente/cliente-form/cliente-form.component';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     SharedModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
