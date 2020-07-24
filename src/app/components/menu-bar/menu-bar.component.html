@@ -1,12 +1,22 @@
-<mat-toolbar class="header mat-elevation-z3" color="primary">
-  <button mat-flat-button color="primary" routerLink="/ordem-servico">Ordem de Serviço</button>
+<ul>
+  <li>
+    <a routerLink="/">
+      <span>
+        <img class="logo" src="../../../assets/pc.svg" alt="Logo">
+      </span>
+    </a>
+  </li>
 
-  <button mat-flat-button [matMenuTriggerFor]="appMenu" color="primary">Cadastro</button>
-    <mat-menu #appMenu="matMenu">
-      <button routerLink="/clientes" mat-menu-item>Cliente</button>
-      <button mat-menu-item>Serviço</button>
-      <button mat-menu-item>Funcionário</button>
-    </mat-menu>
-</mat-toolbar>
+  <li>
+      <a routerLink="ordem-servico">Ordens de Serviço</a>
+  </li>
 
-
+  <li class="dropdown">
+      <a class="dropbtn">Cadastrar</a>
+    <div class="dropdown-content">
+      <a href="#">Ordem de Serviço</a>
+      <a routerLink="clientes">Cliente</a>
+      <a href="#">Serviço</a>
+    </div>
+  </li>
+</ul>
