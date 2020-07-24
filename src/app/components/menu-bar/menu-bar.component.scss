@@ -3,65 +3,87 @@ ul {
   align-items: center;
   justify-content: flex-start;
   list-style-type: none;
-  margin: 0 0 8vh 0;
-  padding: 0;
+  margin: 0;
   overflow: hidden;
   background-color: #3f51b5;
   box-shadow: 0 3px 3px rgba(0,0,0,0.6);
-}
 
-li {
-  float: left;
-}
+  li {
+    float: left;
 
-span {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  justify-content: center;
-}
+    > a, .dropbtn {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 12px 32px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      border-radius: 4px;
 
-li a, .dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 8px 16px;
-  text-decoration: none;
-  font-size: 1rem;
-}
+      span {
+        display: flex;
+        width: 32px;
+        height: 32px;
+        justify-content: center;
+      }
+    }
 
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: #3a4baa;
-}
+    .dropbtn {
+      display: flex;
+      align-items: center;
 
-li.dropdown {
-  display: inline-block;
-}
+      i {
+        margin-left: 4px;
+        font-size: 10px;
+      }
+    }
+  }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+  .ordem-servico,
+  .dropbtn {
+    transition: 0.3s;
+  }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #373737;
-}
+  .ordem-servico:hover,
+  .dropbtn:hover {
+    transition: 0.3s;
+    background-color: #3949a3;
+  }
 
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
+  .dropdown {
+    display: inline-block;
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 4px;
 
-.dropdown:hover .dropdown-content {
-  display: block;
+      a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #898989;
+        border-radius: 4px;
+
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
+
+    &:hover .dropdown-content {
+      display: block;
+      transition: 0.5s;
+    }
+  }
 }
