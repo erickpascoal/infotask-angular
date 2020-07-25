@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>Dados do cliente</h2>
+<h2 *ngIf="formGroup.controls['nome'].value" mat-dialog-title>Cliente
+  [{{formGroup.controls['nome'].value}}]</h2>
+<h2 *ngIf="!formGroup.controls['nome'].value" mat-dialog-title>Cliente</h2>
 <mat-dialog-content class="mat-typography">
   <fieldset>
     <div class="field-group">

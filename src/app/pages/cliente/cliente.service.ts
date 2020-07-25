@@ -8,14 +8,14 @@ import { environment } from '../../../environments/environment';
 })
 export class ClienteService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public url = environment.endpointBackend;
 
   findAll(tableConfig: any) {
     let httpParams = new HttpParams();
 
-    if(tableConfig) {
+    if (tableConfig) {
       httpParams = httpParams.append("tableConfig", JSON.stringify(tableConfig));
     }
 
@@ -23,6 +23,10 @@ export class ClienteService {
       headers: null,
       params: httpParams
     }).toPromise();
+  }
+
+  findAllAtivos() {
+    return this.http.get(`${this.url}/cliente/ativos`).toPromise();
   }
 
   create(cliente: any) {

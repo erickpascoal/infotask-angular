@@ -64,7 +64,7 @@ export class ClienteFormComponent implements OnInit {
 
       data_cadastro: [cliente.data_cadastro,
       Validators.compose(
-        [Validators.required])],
+        [])],
 
       estado: [cliente.estado,
       Validators.compose(
@@ -94,6 +94,8 @@ export class ClienteFormComponent implements OnInit {
 
   submit() {
     this.formGroup.markAllAsTouched();
+    console.log(this.formGroup.controls['id'].value);
+
     if (this.formGroup.valid) {
       if (!this.formGroup.controls['id'].value) {
         this.create();
@@ -105,22 +107,7 @@ export class ClienteFormComponent implements OnInit {
 
   async create() {
     try {
-      const { nome, email, cpf, cnpj, rg, telefone, celular, cep, estado, cidade, bairro, endereco, numero } = this.formGroup.value;
-      const cliente = {
-        nome,
-        email,
-        cpf,
-        cnpj,
-        rg,
-        telefone,
-        celular,
-        cep,
-        estado,
-        cidade,
-        bairro,
-        endereco,
-        numero
-      }
+      const cliente = this.formGroup.value;
 
       await this.clienteService.create(cliente);
 
@@ -132,23 +119,7 @@ export class ClienteFormComponent implements OnInit {
 
   async update() {
     try {
-      const { id, nome, email, cpf, cnpj, rg, telefone, celular, cep, estado, cidade, bairro, endereco, numero } = this.formGroup.value;
-      const cliente = {
-        id,
-        nome,
-        email,
-        cpf,
-        cnpj,
-        rg,
-        telefone,
-        celular,
-        cep,
-        estado,
-        cidade,
-        bairro,
-        endereco,
-        numero
-      }
+      const cliente = this.formGroup.value;
 
       await this.clienteService.update(cliente);
 

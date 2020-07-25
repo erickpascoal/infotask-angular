@@ -96,7 +96,8 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   openModalCreate() {
     const dialogRef = this.dialog.open(ClienteFormComponent, {
-      autoFocus: false
+      autoFocus: false,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

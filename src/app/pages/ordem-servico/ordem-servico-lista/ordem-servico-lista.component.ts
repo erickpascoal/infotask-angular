@@ -2,6 +2,9 @@ import { WebsocketService } from './../../../websocket.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrdemServicoService } from '../ordem-servico.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { OrdemServicoFormComponent } from '../ordem-servico-form/ordem-servico-form.component';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-ordem-servico-lista',
@@ -12,15 +15,14 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
 
   ordemServicos: any = [];
   totalOrdemServicos: number;
-  openModalForm = false;
-  ordemServicoSelected;
 
   public tableConfig = {
     columns: [
       { title: "Número", property: "numero", width: 'auto', type: 'string' },
       { title: "Status", property: "status", width: 'auto', type: 'string' },
-      { title: "Data Entrada", property: "data_entrada", width: '12%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm", },
-      { title: "Data Saída", property: "data_saida", width: '12%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm", },
+      { title: "Cliente", property: "cliente_nome", width: 'auto', type: 'string' },
+      { title: "Data Entrada", property: "data_entrada", width: '1%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm" },
+      { title: "Data Saída", property: "data_saida", width: '1%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm" },
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
@@ -34,7 +36,11 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
 
   private _socketSubscribe: Subscription;
 
-  constructor(private ordemServicoService: OrdemServicoService, private websocketService: WebsocketService) { }
+  constructor(
+    private ordemServicoService: OrdemServicoService,
+    private websocketService: WebsocketService,
+    public dialog: MatDialog
+  ) { }
 
 
   ngOnInit(): void {
@@ -60,32 +66,14 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
   public handkeRowActionTable(rowAction) {
     switch (rowAction.action) {
       case 'edit':
-        this.openEditModal(rowAction.rowData);
+        this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
-        this.ordemServicoService.delete(rowAction.rowData);
+        this.openModalDelete(rowAction.rowData);
       default:
         break;
     }
     console.log(rowAction)
-  }
-
-  closeOrdemServicoForm() {
-    this.openModalForm = false
-  }
-
-  openCadastrarOrdemServico() {
-    this.ordemServicoSelected = null;
-    this.openModalForm = true;
-  }
-
-  openEditModal(ordemServico) {
-    this.ordemServicoSelected = ordemServico;
-    this.openModalForm = true;
-  }
-
-  openDeleteModal(ordemServico) {
-    this.ordemServicoSelected = ordemServico;
   }
 
   public atualizaLista(event) {
@@ -107,4 +95,49 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  openModalCreate() {
+    const dialogRef = this.dialog.open(OrdemServicoFormComponent, {
+      autoFocus: false,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openModalUpdate(ordemServico) {
+    const dialogRef = this.dialog.open(OrdemServicoFormComponent, {
+      data: {
+        ordemServico
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openModalDelete(ordemServico) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Deletar',
+        message: `Deseja realmente deletar [${ordemServico.numero}] ? `,
+        labelButtonCancel: 'Cancelar',
+        labelButtonSubmit: 'Deletar'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'confirm') {
+        this.ordemServicoService.delete(ordemServico);
+      }
+    });
+  }
+
 }

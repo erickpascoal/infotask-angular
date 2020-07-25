@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { OrdemServicoFormComponent } from './pages/ordem-servico/ordem-servico-form/ordem-servico-form.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ClienteListaComponent,
     MenuBarComponent,
     ClienteFormComponent,
+    OrdemServicoFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
