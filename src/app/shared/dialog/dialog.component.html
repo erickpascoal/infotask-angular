@@ -1,0 +1,12 @@
+<div class="content">
+    <mat-dialog-content>
+        <h2 *ngIf="data.title" mat-dialog-title>{{data.title}}</h2>
+        <div *ngIf="data.message" mat-dialog-content>{{data.message}}</div>
+    </mat-dialog-content>
+    <div class="footer">
+        <button *ngIf="data.labelButtonCancel" (click)="cancel()" class="cancel" mat-button
+            mat-dialog-close>{{data.labelButtonCancel}}</button>
+        <button *ngIf="data.labelButtonSubmit" (click)="confirm()" class="confirm" mat-button
+            mat-dialog-close>{{data.labelButtonSubmit}}</button>
+    </div>
+</div>

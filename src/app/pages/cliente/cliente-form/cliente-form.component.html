@@ -5,14 +5,14 @@
       <p>
         <mat-form-field class="nome-cliente" appearance="outline">
           <mat-label>Nome</mat-label>
-          <input matInput placeholder="Ex.: Maria José da Silva">
+          <input matInput [formControl]="formGroup.controls['nome']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field class="nome-cliente" appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="exemplo@eletroinfo.com">
+          <input matInput [formControl]="formGroup.controls['email']">
         </mat-form-field>
       </p>
     </div>
@@ -21,21 +21,21 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="Ex.: 000.000.000-00">
+          <input matInput [formControl]="formGroup.controls['cpf']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CNPJ</mat-label>
-          <input matInput placeholder="Ex.: 00.000.000/0000-00">
+          <input matInput [formControl]="formGroup.controls['cnpj']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>RG</mat-label>
-          <input matInput placeholder="Ex.: 0.000.000">
+          <input matInput [formControl]="formGroup.controls['rg']">
         </mat-form-field>
       </p>
     </div>
@@ -44,14 +44,14 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input matInput placeholder="(99) 9999-9999">
+          <input matInput [formControl]="formGroup.controls['telefone']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Celular</mat-label>
-          <input matInput placeholder="(99) 9 9999-9999">
+          <input matInput [formControl]="formGroup.controls['celular']">
         </mat-form-field>
       </p>
     </div>
@@ -60,21 +60,21 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CEP</mat-label>
-          <input matInput placeholder="00000-000">
+          <input matInput [formControl]="formGroup.controls['cep']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Estado</mat-label>
-          <input matInput placeholder="Ex.: Expírito Santo">
+          <input matInput [formControl]="formGroup.controls['estado']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Cidade</mat-label>
-          <input matInput placeholder="Ex.: Vila Velha">
+          <input matInput [formControl]="formGroup.controls['cidade']">
         </mat-form-field>
       </p>
     </div>
@@ -83,27 +83,27 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Bairro</mat-label>
-          <input matInput placeholder="Ex.: Terra Vermelha">
+          <input matInput [formControl]="formGroup.controls['bairro']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Endereço</mat-label>
-          <input matInput placeholder="Ex.: Rua dos Bobos">
+          <input matInput [formControl]="formGroup.controls['endereco']">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Número</mat-label>
-          <input matInput placeholder="Ex.: 0">
+          <input matInput [formControl]="formGroup.controls['numero']">
         </mat-form-field>
       </p>
     </div>
   </fieldset>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button>Cancel</button>
-  <button>Salvar</button>
+  <button class="cancelar" (click)="closeModal()">Cancelar</button>
+  <button class="salvar" (click)="submit()">Salvar</button>
 </mat-dialog-actions>

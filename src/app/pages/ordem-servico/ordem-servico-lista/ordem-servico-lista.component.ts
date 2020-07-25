@@ -95,7 +95,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
           this.ordemServicos.unshift(event.ordemServico)
           break;
         case 'update':
-          const index = this.ordemServicos.findIndex(m => m.id === event.ordemServico.id);
+          const index = this.ordemServicos.findIndex(m => m.id == event.ordemServico.id);
           this.ordemServicos[index] = event.ordemServico;
           break;
         case 'delete':

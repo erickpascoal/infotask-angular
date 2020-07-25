@@ -1,3 +1,4 @@
+import { DialogComponent } from './../../../shared/dialog/dialog.component';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from './../../../websocket.service';
@@ -15,20 +16,19 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   clientes: any = [];
   totalClientes: number;
-  clienteSelected;
 
   public tableConfig = {
     columns: [
       { title: "Cliente", property: "nome", width: 'auto', type: 'string' },
       { title: "CPF", property: "cpf", width: 'auto', type: 'string' },
-      { title: "Contato", property: "celular", width: 'auto', type: 'string' },
+      { title: "Contato", property: "telefone_principal", width: 'auto', type: 'string' },
       { title: "Cidade", property: "cidade", width: 'auto', type: 'string' }
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
-      { label: "Deletar", action: "delete", icon: "fa fa-trash" }
+      { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
-    rowsPerPage: 5,
+    rowsPerPage: 10,
     page: 1,
     countData: 0,
     createButton: true
@@ -67,10 +67,10 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   public handleAction(rowAction) {
     switch (rowAction.action) {
       case 'edit':
-        this.openEditarCadastro(rowAction.rowData);
+        this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
-        this.clienteService.delete(rowAction.rowData);
+        this.openModalDelete(rowAction.rowData);
       default: break;
     }
   }
@@ -82,23 +82,21 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
           this.clientes.unshift(event.cliente);
           break;
         case 'update':
-          const index = this.clientes.findIndex(c => c.id === event.cliente.id);
+          const index = this.clientes.findIndex(c => c.id == event.cliente.id);
           this.clientes[index] = event.cliente;
           break;
         case 'delete':
-          const indexToDel = this.clientes.findIndex(c => c.id === event.cliente.id);
-          this.clientes.splice(indexToDel, 1);
+          console.log(event.cliente);
+          const indexDelete = this.clientes.findIndex(c => c.id == event.cliente.id);
+          this.clientes.splice(indexDelete, 1);
         default: break;
       }
     }
   }
 
   openModalCreate() {
-    this.clienteSelected = null;
     const dialogRef = this.dialog.open(ClienteFormComponent, {
-      data: {
-        nome: 'Erick'
-      }
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -106,11 +104,36 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     });
   }
 
-  openEditarCadastro(cliente) {
-    this.clienteSelected = cliente;
+  openModalUpdate(cliente) {
+    const dialogRef = this.dialog.open(ClienteFormComponent, {
+      data: {
+        cliente
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
-  openModalDeletarCliente(cliente) {
-    this.clienteSelected = cliente;
+  openModalDelete(cliente) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Deletar',
+        message: `Deseja realmente deletar [${cliente.nome}] ? `,
+        labelButtonCancel: 'Cancelar',
+        labelButtonSubmit: 'Deletar'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'confirm') {
+        this.clienteService.delete(cliente);
+      }
+    });
   }
 }
