@@ -22,7 +22,8 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
       { title: "Cliente", property: "nome", width: 'auto', type: 'string' },
       { title: "CPF", property: "cpf", width: 'auto', type: 'string' },
       { title: "Contato", property: "telefone_principal", width: 'auto', type: 'string' },
-      { title: "Cidade", property: "cidade", width: 'auto', type: 'string' }
+      { title: "Cidade", property: "cidade", width: 'auto', type: 'string' },
+      { title: "Ativo", property: "cliente_ativo", width: 'auto', type: 'boolean', pipe: 'ativo' }
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },

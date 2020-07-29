@@ -1,6 +1,6 @@
-<h2 *ngIf="formGroup.controls['nome'].value" mat-dialog-title>Cliente
-  [{{formGroup.controls['nome'].value}}]</h2>
-<h2 *ngIf="!formGroup.controls['nome'].value" mat-dialog-title>Cliente</h2>
+<h2 *ngIf="!isUpdate">Cliente</h2>
+<h2 *ngIf="isUpdate" >Cliente [{{formGroup.controls['nome'].value}}]</h2>
+
 <mat-dialog-content class="mat-typography">
   <fieldset>
     <div class="field-group">
@@ -19,6 +19,12 @@
       </p>
     </div>
 
+    <mat-radio-group [formControl]="formGroup.controls['cliente_ativo']">
+      <p>Ativo:</p>
+      <mat-radio-button [checked]="formGroup.controls['cliente_ativo'].value === true" value="true">Sim</mat-radio-button>
+      <mat-radio-button [checked]="formGroup.controls['cliente_ativo'].value === false" value="false">Não</mat-radio-button>
+    </mat-radio-group>
+    
     <div class="field-group">
       <p>
         <mat-form-field appearance="outline">
@@ -99,7 +105,7 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Número</mat-label>
-          <input matInput [formControl]="formGroup.controls['numero']">
+          <input matInput [formControl]="formGroup.controls['endereco_numero']">
         </mat-form-field>
       </p>
     </div>

@@ -30,21 +30,31 @@ fieldset {
 
 mat-dialog-actions {
   margin-top: 15px;
+
+  button {
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin: 2px;
+    padding: 8px 16px;
+    background-color: #3f51b5;
+  }
+
+  button.cancelar {
+    background-color: #4e4e4e;
+  }
 }
 
-button {
-  border: none;
-  border-radius: 4px;
-  color: white;
-  margin: 2px;
-  padding: 8px 16px;
-}
+mat-radio-group {
+  p {
+    margin-left: 16px
+  }
+  
+  mat-radio-button {
+    margin: 8px 16px;
 
-.salvar {
-  background-color: #3f51b5;
+    & + mat-radio-button {
+      margin-left: 10px;
+    }
+  }
 }
-
-.cancelar {
-  color: #4e4e4e;
-}
-

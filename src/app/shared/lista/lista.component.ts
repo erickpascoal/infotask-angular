@@ -56,12 +56,14 @@ export class ListaComponent implements OnInit {
     const pipe: string = columnHead.pipe;
     const value = data[property];
 
-    if (!pipe || !value) {
+    if (!pipe || value == null || value == undefined) {
       return value;
     } else {
       if (pipe.indexOf('date') >= 0) {
         const format = pipe.replace('date:', '');
         return moment(value).format(format);
+      } else if (pipe.indexOf('ativo') >= 0) {
+        return value === true ? 'SIM' : 'NÃO'
       }
     }
   }
