@@ -34,6 +34,8 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     createButton: true
   }
 
+  public value = true;
+
   private _socketSubscribe: Subscription;
 
   constructor(
@@ -56,6 +58,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     const response: any = await this.ordemServicoService.findAll(this.tableConfig);
     this.ordemServicos = response.data;
     this.tableConfig.countData = +response.count;
+    console.log(response)
   }
 
   public buildQuery(tableConfigToSend) {
@@ -63,7 +66,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     this.loadOrdemServicos();
   }
 
-  public handkeRowActionTable(rowAction) {
+  public handleRowActionTable(rowAction) {
     switch (rowAction.action) {
       case 'edit':
         this.openModalUpdate(rowAction.rowData);
@@ -139,5 +142,4 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 }

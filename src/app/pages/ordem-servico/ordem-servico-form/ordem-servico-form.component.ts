@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../cliente/cliente.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
 @Component({
   selector: 'app-ordem-servico-form',
   templateUrl: './ordem-servico-form.component.html',
@@ -22,11 +23,11 @@ export class OrdemServicoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ordemServicoService: OrdemServicoService,
     private clienteService: ClienteService,
-
   ) { }
 
   ngOnInit(): void {
     this.loadClientes();
+
     if (!this.data) {
       this.isUpdate = false;
       this.buildForm({});
@@ -160,12 +161,9 @@ export class OrdemServicoFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
   async loadClientes() {
     const response: any = await this.clienteService.findAllAtivos();
 
     this.clientes = response.data;
-
   }
-
 }
