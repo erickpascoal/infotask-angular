@@ -38,8 +38,10 @@
 
 <div class="pagination">
     <a [ngClass]="{ 'invisible' : listaConfig.page == 1 }" (click)="onClickPreviusPage()">&laquo;</a>
-    <a *ngFor="let page of getPages()" [ngClass]="{'active': page == listaConfig.page}"
-        (click)="setPage(page)">{{page}}</a>
+    <div *ngFor="let page of getPages()">
+        <a *ngIf="rangePagesVisible(page)" [ngClass]="{'active': page == listaConfig.page}"
+            (click)="setPage(page)">{{page}}</a>
+    </div>
     <a [ngClass]="{ 'invisible' : listaConfig.page == totalPages || listaConfig.countData == 0 }"
         (click)="onClickNextPage()">&raquo;</a>
 </div>

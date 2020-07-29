@@ -26,7 +26,7 @@ export class ListaComponent implements OnInit {
   @Output()
   public createActionEmmiter = new EventEmitter();
 
-  public pageList: number[];
+  public pageList: number[] = [];
 
   public search: string;
 
@@ -129,5 +129,36 @@ export class ListaComponent implements OnInit {
 
   public sendCreateActionEmmiter() {
     this.createActionEmmiter.emit();
+  }
+
+  public rangePagesVisible(page): boolean {
+    let rangeRigth = 4;
+    let rangeLeft = 4;
+    const actualPage = this.listaConfig.page;
+    const lastPage = this.getPages()[this.getPages().length - 1];
+
+    if (page == this.listaConfig.page) {
+      return true;
+    }
+
+    const left = actualPage - rangeLeft;
+    if (left < 1) {
+      rangeRigth += (left * -1 + 1)
+    }
+
+    const rigth = +lastPage - (+actualPage + +rangeRigth);
+    console.log(lastPage);
+
+    if (+rigth < 1) {
+      rangeLeft += (rigth * -1)
+    }
+
+    if (page > this.listaConfig.page && page <= (actualPage + rangeRigth)) {
+      return true;
+    }
+
+    if (page < this.listaConfig.page && page >= (actualPage - rangeLeft)) {
+      return true;
+    }
   }
 }
