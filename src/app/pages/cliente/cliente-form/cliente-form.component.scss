@@ -12,11 +12,13 @@ fieldset {
       font-size: 0.8rem;
     }
 
-    mat-form-field.nome-cliente,
+    mat-form-field.nome-cliente {
+      width: 280px;
+    }
+
     .contato mat-form-field {
       width: 310px;
     }
-
 
   .field-group {
     width: auto;
@@ -25,6 +27,11 @@ fieldset {
     p + p {
       margin-left: 16px;
     }
+  }
+
+  p {
+    display: flex;
+    flex-direction: column;
   }
 }
 

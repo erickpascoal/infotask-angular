@@ -8,25 +8,23 @@ fieldset {
   padding: 0 40px;
   border: 0;
 
-    mat-form-field mat-label {
-      font-size: 0.8rem;
-    }
+  mat-form-field mat-label {
+    font-size: 0.8rem;
+  }
 
-    mat-form-field.nome-cliente,
-    .contato mat-form-field {
-      width: 310px;
-    }
+  mat-form-field {
+    width: 100%;
+  }
 
-
-  .field-group {
-    width: auto;
+  .container  {
     display: flex;
 
-    p + p {
-      margin-left: 16px;
+    .mat-form-field + .mat-form-field {
+      margin-left: 8px;
     }
   }
 }
+
 
 mat-dialog-actions {
   margin-top: 15px;
