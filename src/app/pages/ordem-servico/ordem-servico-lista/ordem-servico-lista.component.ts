@@ -102,7 +102,9 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
   openModalCreate() {
     const dialogRef = this.dialog.open(OrdemServicoFormComponent, {
       autoFocus: false,
-      disableClose: true
+      disableClose: true, 
+      width: '80%',
+      maxHeight: '95%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -116,7 +118,9 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
         ordemServico
       },
       disableClose: true,
-      autoFocus: false
+      autoFocus: false,
+      width: '80%',
+      maxHeight: '95%',
     });
 
     dialogRef.afterClosed().subscribe(result => {

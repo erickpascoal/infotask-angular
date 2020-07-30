@@ -63,51 +63,26 @@ export class OrdemServicoFormComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       id: [ordemServico.id],
 
-      numero: [ordemServico.numero,
-      Validators.compose(
-        [
-        ])],
+      numero: [ordemServico.numero],
 
-      cliente_nome: [ordemServico.cliente_nome,
-      Validators.compose(
-        [
-        ])],
+      cliente_nome: [ordemServico.cliente_nome],
 
-      modelo: [ordemServico.modelo,
-      Validators.compose(
-        [
-        ])],
+      modelo: [ordemServico.modelo],
 
-      status: [ordemServico.status,
-      Validators.compose([
-        Validators.required
-      ])],
+      status: [ordemServico.status, Validators.required],
 
-      problema_reclamado: [ordemServico.problema_reclamado,
-      Validators.compose(
-        [
-        ])],
+      problema_reclamado: [ordemServico.problema_reclamado],
 
-      observacao: [ordemServico.observacao,
-      Validators.compose(
-        [])],
+      observacao: [ordemServico.observacao],
 
-      defeito_encontrado: [ordemServico.defeito_encontrado,
-      Validators.compose(
-        [])],
+      defeito_encontrado: [ordemServico.defeito_encontrado],
 
-      valor: [ordemServico.valor,
-      Validators.compose(
-        [])],
+      valor: [ordemServico.valor],
 
-      observacao_tecnico: [ordemServico.observacao_tecnico,
-      Validators.compose(
-        [])],
+      observacao_tecnico: [ordemServico.observacao_tecnico],
 
-      data_saida: [ordemServico.data_saida,
-      Validators.compose(
-        [])],
-    })
+      data_saida: [ordemServico.data_saida],
+    });
 
     this.bloqueiaCampos();
   }

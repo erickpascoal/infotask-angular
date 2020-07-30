@@ -22,7 +22,7 @@ export class ClienteFormComponent implements OnInit {
   ngOnInit(): void {
     if (!this.data) {
       this.isUpdate = false;
-      this.buildForm({cliente_ativo: true});
+      this.buildForm({ativo: true});
     } else {
       this.isUpdate = true;
       this.buildForm(this.data.cliente);
@@ -33,69 +33,35 @@ export class ClienteFormComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       id: [cliente.id],
 
-      nome: [cliente.nome,
-      Validators.compose(
-        [
-          Validators.required
-        ])],
+      nome: [cliente.nome, Validators.required],
 
-      rg: [cliente.rg,
-      Validators.compose([
-      ])],
+      rg: [cliente.rg],
 
-      cpf: [cliente.cpf,
-      Validators.compose(
-        [
-          Validators.required
-        ])],
+      cpf: [cliente.cpf, Validators.required],
 
-      cnpj: [cliente.cnpj,
-      Validators.compose(
-        [])],
+      cnpj: [cliente.cnpj],
 
-      email: [cliente.email,
-      Validators.compose(
-        [Validators.email])],
+      email: [cliente.email, Validators.email],
 
-      telefone: [cliente.telefone,
-      Validators.compose(
-        [])],
+      telefone: [cliente.telefone],
 
-      celular: [cliente.celular,
-      Validators.compose(
-        [])],
+      celular: [cliente.celular],
 
-      data_cadastro: [cliente.data_cadastro,
-      Validators.compose(
-        [])],
+      data_cadastro: [cliente.data_cadastro],
 
-      estado: [cliente.estado,
-      Validators.compose(
-        [])],
+      estado: [cliente.estado],
 
-      cidade: [cliente.cidade,
-      Validators.compose(
-        [])],
+      cidade: [cliente.cidade],
 
-      bairro: [cliente.bairro,
-      Validators.compose(
-        [])],
+      bairro: [cliente.bairro],
 
-      endereco: [cliente.endereco,
-      Validators.compose(
-        [])],
+      endereco: [cliente.endereco],
 
-      endereco_numero: [cliente.endereco_numero,
-      Validators.compose(
-        [])],
+      endereco_numero: [cliente.endereco_numero],
 
-      cep: [cliente.cep,
-      Validators.compose(
-        [])],
+      cep: [cliente.cep],
 
-      cliente_ativo: [cliente.cliente_ativo,
-        Validators.compose(
-        [])],
+      ativo: [cliente.ativo],
     })
   }
 

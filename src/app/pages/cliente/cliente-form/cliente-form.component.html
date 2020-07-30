@@ -2,64 +2,67 @@
 <h2 *ngIf="isUpdate" >Cliente [{{formGroup.controls['nome'].value}}]</h2>
 
 <mat-dialog-content class="mat-typography">
-  <fieldset>
+  <fieldset [formGroup]="formGroup">
     <div class="field-group">
       <p>
         <mat-form-field class="nome-cliente" appearance="outline">
           <mat-label>Nome</mat-label>
-          <input matInput [formControl]="formGroup.controls['nome']">
+          <input matInput formControlName="nome">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field class="nome-cliente" appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput [formControl]="formGroup.controls['email']">
+          <input matInput formControlName="email">
         </mat-form-field>
       </p>
-    </div>
 
-    <mat-radio-group [formControl]="formGroup.controls['cliente_ativo']">
-      <p>Ativo:</p>
-      <mat-radio-button [checked]="formGroup.controls['cliente_ativo'].value === true" value="true">Sim</mat-radio-button>
-      <mat-radio-button [checked]="formGroup.controls['cliente_ativo'].value === false" value="false">Não</mat-radio-button>
-    </mat-radio-group>
+      <!-- <p> Ativo: 
+        <mat-slide-toggle [checked]="formGroup.controls['ativo'].value === true" (change)="toggleChange($event)"></mat-slide-toggle>
+      </p> -->
+
+      <p> Ativo: 
+        <mat-slide-toggle color="primary" formControlName="ativo" [checked]="true"></mat-slide-toggle>
+      </p>
+
+    </div>
     
     <div class="field-group">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CPF</mat-label>
-          <input matInput [formControl]="formGroup.controls['cpf']">
+          <input matInput formControlName="cpf">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CNPJ</mat-label>
-          <input matInput [formControl]="formGroup.controls['cnpj']">
+          <input matInput formControlName="cnpj">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>RG</mat-label>
-          <input matInput [formControl]="formGroup.controls['rg']">
+          <input matInput formControlName="rg">
         </mat-form-field>
       </p>
     </div>
 
     <div class="field-group contato">
       <p>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Telefone</mat-label>
-          <input matInput [formControl]="formGroup.controls['telefone']">
+          <input matInput formControlName="telefone">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Celular</mat-label>
-          <input matInput [formControl]="formGroup.controls['celular']">
+          <input matInput formControlName="celular">
         </mat-form-field>
       </p>
     </div>
@@ -68,21 +71,21 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>CEP</mat-label>
-          <input matInput [formControl]="formGroup.controls['cep']">
+          <input matInput formControlName="cep">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Estado</mat-label>
-          <input matInput [formControl]="formGroup.controls['estado']">
+          <input matInput formControlName="estado">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Cidade</mat-label>
-          <input matInput [formControl]="formGroup.controls['cidade']">
+          <input matInput formControlName="cidade">
         </mat-form-field>
       </p>
     </div>
@@ -91,21 +94,21 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Bairro</mat-label>
-          <input matInput [formControl]="formGroup.controls['bairro']">
+          <input matInput formControlName="bairro">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Endereço</mat-label>
-          <input matInput [formControl]="formGroup.controls['endereco']">
+          <input matInput formControlName="endereco">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Número</mat-label>
-          <input matInput [formControl]="formGroup.controls['endereco_numero']">
+          <input matInput formControlName="endereco_numero">
         </mat-form-field>
       </p>
     </div>

@@ -2,75 +2,58 @@
   [{{formGroup.controls['numero'].value}}]</h2>
 <h2 *ngIf="!formGroup.controls['numero'].value" mat-dialog-title>Ordem de serviço</h2>
 <mat-dialog-content class="mat-typography">
-  <fieldset>
-    <div class="field-group">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Cliente</mat-label>
-          <input type="text" placeholder="Buscar..." aria-label="Number" matInput
-            [formControl]="formGroup.controls['cliente_nome']" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let cliente of clientesFiltrados | async " [value]="cliente.nome">
-              {{cliente.nome }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </p>
+  <fieldset [formGroup]="formGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Cliente</mat-label>
+        <input type="text" placeholder="Buscar..." aria-label="Number" matInput
+          formControlName="cliente_nome" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let cliente of clientesFiltrados | async " [value]="cliente.nome">
+            {{cliente.nome }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-      <p>
+      <div class="container">
         <mat-form-field appearance="outline">
           <mat-label>Modelo</mat-label>
-          <input matInput [formControl]="formGroup.controls['modelo']">
+          <input matInput formControlName="modelo">
         </mat-form-field>
-      </p>
 
-      <p>
         <mat-form-field appearance="outline">
           <mat-label>Status</mat-label>
-          <input matInput [formControl]="formGroup.controls['status']">
+          <input matInput formControlName="status">
         </mat-form-field>
-      </p>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Preço</mat-label>
+          <input matInput formControlName="valor">
+        </mat-form-field>
+      </div>
+    
+    <div class="container">
+      <mat-form-field appearance="legacy">
+        <mat-label>Problema Reclamado</mat-label>
+        <textarea rows="4" matInput formControlName="problema_reclamado"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Defeito encontrado</mat-label>
+        <textarea rows="4" matInput formControlName="defeito_encontrado"></textarea>
+      </mat-form-field>
     </div>
 
-    <div class="field-group">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Problema reclamado</mat-label>
-          <input matInput [formControl]="formGroup.controls['problema_reclamado']">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field appearance="legacy">
+        <mat-label>Observação</mat-label>
+        <textarea rows="4" matInput formControlName="observacao"></textarea>
+      </mat-form-field>
 
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Observação</mat-label>
-          <input matInput [formControl]="formGroup.controls['observacao']">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Defeito encontrado</mat-label>
-          <input matInput [formControl]="formGroup.controls['defeito_encontrado']">
-        </mat-form-field>
-      </p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Observação do técnico</mat-label>
+        <textarea rows="4" matInput formControlName="observacao_tecnico"></textarea>
+      </mat-form-field>
     </div>
-
-    <div class="field-group contato">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Valor</mat-label>
-          <input matInput [formControl]="formGroup.controls['valor']">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Observação do técnico</mat-label>
-          <input matInput [formControl]="formGroup.controls['observacao_tecnico']">
-        </mat-form-field>
-      </p>
-    </div>
-
   </fieldset>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
