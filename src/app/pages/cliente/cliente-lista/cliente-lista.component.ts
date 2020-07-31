@@ -13,7 +13,6 @@ import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 })
 
 export class ClienteListaComponent implements OnInit, OnDestroy {
-
   clientes: any = [];
   totalClientes: number;
 
@@ -98,7 +97,9 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   openModalCreate() {
     const dialogRef = this.dialog.open(ClienteFormComponent, {
       autoFocus: false,
-      disableClose: true
+      disableClose: true,
+      width: '80%',
+      maxHeight: '95%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -112,7 +113,9 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
         cliente
       },
       disableClose: true,
-      autoFocus: false
+      autoFocus: false,
+      width: '80%',
+      maxHeight: '95%',
     });
 
     dialogRef.afterClosed().subscribe(result => {

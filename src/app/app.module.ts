@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { OrdemServicoFormComponent } from './pages/ordem-servico/ordem-servico-form/ordem-servico-form.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ServicoListaComponent } from './pages/servico/servico-lista/servico-lista.component';
+import { ServicoFormComponent } from './pages/servico/servico-form/servico-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MenuBarComponent,
     ClienteFormComponent,
     OrdemServicoFormComponent,
+    ServicoListaComponent,
+    ServicoFormComponent,
   ],
   imports: [
     BrowserModule,

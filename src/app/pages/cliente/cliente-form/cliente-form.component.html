@@ -3,114 +3,85 @@
 
 <mat-dialog-content class="mat-typography">
   <fieldset [formGroup]="formGroup">
-    <div class="field-group">
-      <p>
-        <mat-form-field class="nome-cliente" appearance="outline">
-          <mat-label>Nome</mat-label>
-          <input matInput formControlName="nome">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field class="nome-cliente" appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
 
-      <p>
-        <mat-form-field class="nome-cliente" appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
-        </mat-form-field>
-      </p>
-
-      <!-- <p> Ativo: 
-        <mat-slide-toggle [checked]="formGroup.controls['ativo'].value === true" (change)="toggleChange($event)"></mat-slide-toggle>
-      </p> -->
+      <mat-form-field class="nome-cliente" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
 
       <p> Ativo: 
         <mat-slide-toggle color="primary" formControlName="ativo" [checked]="true"></mat-slide-toggle>
       </p>
-
     </div>
+
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf">
+      </mat-form-field>
     
-    <div class="field-group">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>CNPJ</mat-label>
-          <input matInput formControlName="cnpj">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>RG</mat-label>
-          <input matInput formControlName="rg">
-        </mat-form-field>
-      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>CNPJ</mat-label>
+        <input matInput formControlName="cnpj">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>RG</mat-label>
+        <input matInput formControlName="rg">
+      </mat-form-field>
     </div>
 
-    <div class="field-group contato">
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Celular</mat-label>
-          <input matInput formControlName="celular">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="telefone">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="celular">
+      </mat-form-field>
     </div>
 
-    <div class="field-group">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Estado</mat-label>
-          <input matInput formControlName="estado">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Cidade</mat-label>
-          <input matInput formControlName="cidade">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="estado">
+      </mat-form-field>
     </div>
 
-    <div class="field-group">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Bairro</mat-label>
-          <input matInput formControlName="bairro">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="cidade">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro">
+      </mat-form-field>
+    </div>
 
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Endereço</mat-label>
-          <input matInput formControlName="endereco">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Número</mat-label>
-          <input matInput formControlName="endereco_numero">
-        </mat-form-field>
-      </p>
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="endereco">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="endereco_numero">
+      </mat-form-field>
     </div>
   </fieldset>
 </mat-dialog-content>
