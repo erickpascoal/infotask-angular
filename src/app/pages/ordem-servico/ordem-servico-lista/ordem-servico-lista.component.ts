@@ -58,7 +58,6 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     const response: any = await this.ordemServicoService.findAll(this.tableConfig);
     this.ordemServicos = response.data;
     this.tableConfig.countData = +response.count;
-    console.log(response)
   }
 
   public buildQuery(tableConfigToSend) {
@@ -76,7 +75,6 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
       default:
         break;
     }
-    console.log(rowAction)
   }
 
   public atualizaLista(event) {
@@ -108,7 +106,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -124,7 +122,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 

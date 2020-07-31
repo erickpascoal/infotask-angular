@@ -27,7 +27,7 @@ export class OrdemServicoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadClientes();
+    this.loadClientesAtivos();
 
     this.servicos = [
       {
@@ -102,7 +102,7 @@ export class OrdemServicoFormComponent implements OnInit {
 
       data_saida: [ordemServico.data_saida],
 
-      servico_id: [ordemServico.servico_id],
+      servico_id: [ordemServico.servico_id ? ordemServico.servico_id.toString() : ordemServico.servico_id],
     });
 
     this.bloqueiaCampos();
@@ -115,8 +115,6 @@ export class OrdemServicoFormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.formGroup.value);
-
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       if (!this.isUpdate) {
@@ -134,7 +132,6 @@ export class OrdemServicoFormComponent implements OnInit {
       ordemServico.cliente_id = cliente.id;
       ordemServico.cliente_nome = cliente.nome;
       ordemServico.cliente_cpf = cliente.cpf;
-      console.log(ordemServico);
 
       await this.ordemServicoService.create(ordemServico);
 
@@ -157,7 +154,7 @@ export class OrdemServicoFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  async loadClientes() {
+  async loadClientesAtivos() {
     const response: any = await this.clienteService.findAllAtivos();
 
     this.clientes = response.data;
