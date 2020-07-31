@@ -1,55 +1,68 @@
 <h2 *ngIf="formGroup.controls['numero'].value" mat-dialog-title>Ordem de serviço
   [{{formGroup.controls['numero'].value}}]</h2>
 <h2 *ngIf="!formGroup.controls['numero'].value" mat-dialog-title>Ordem de serviço</h2>
+
 <mat-dialog-content class="mat-typography">
   <fieldset [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Cliente</mat-label>
+      <input type="text" placeholder="Buscar..." aria-label="Number" matInput formControlName="cliente_nome"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let cliente of clientesFiltrados | async " [value]="cliente.nome">
+          {{cliente.nome }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="container">
       <mat-form-field appearance="outline">
-        <mat-label>Cliente</mat-label>
-        <input type="text" placeholder="Buscar..." aria-label="Number" matInput
-          formControlName="cliente_nome" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let cliente of clientesFiltrados | async " [value]="cliente.nome">
-            {{cliente.nome }}
-          </mat-option>
-        </mat-autocomplete>
+        <mat-label>Modelo</mat-label>
+        <input matInput formControlName="modelo">
       </mat-form-field>
 
-      <div class="container">
-        <mat-form-field appearance="outline">
-          <mat-label>Modelo</mat-label>
-          <input matInput formControlName="modelo">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="status">
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Status</mat-label>
-          <input matInput formControlName="status">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Preço</mat-label>
+        <input matInput formControlName="valor">
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Preço</mat-label>
-          <input matInput formControlName="valor">
-        </mat-form-field>
-      </div>
-    
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Serviço</mat-label>
+        <mat-select formControlName="servico_id">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let servico of servicos" value="{{servico.id}}">{{servico.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+
     <div class="container">
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="outline">
         <mat-label>Problema Reclamado</mat-label>
         <textarea rows="4" matInput formControlName="problema_reclamado"></textarea>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="outline">
         <mat-label>Defeito encontrado</mat-label>
         <textarea rows="4" matInput formControlName="defeito_encontrado"></textarea>
       </mat-form-field>
     </div>
 
     <div class="container">
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="outline">
         <mat-label>Observação</mat-label>
         <textarea rows="4" matInput formControlName="observacao"></textarea>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="outline">
         <mat-label>Observação do técnico</mat-label>
         <textarea rows="4" matInput formControlName="observacao_tecnico"></textarea>
       </mat-form-field>

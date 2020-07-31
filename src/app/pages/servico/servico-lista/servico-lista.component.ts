@@ -17,9 +17,9 @@ export class ServicoListaComponent implements OnInit {
 
   public tableConfig = {
     columns: [
-      { title: "Serviço", property: "nome", width: 'auto', type: 'string' },
-      { title: "Ativo", property: "ativo", width: 'auto', type: 'boolean' },
+      { title: "Nome", property: "nome", width: 'auto', type: 'string' },
       { title: "Descrição", property: "descricao", width: 'auto', type: 'string' },
+      { title: "Ativo", property: "ativo", width: 'auto', type: 'boolean', pipe: 'ativo' },
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
@@ -38,7 +38,7 @@ export class ServicoListaComponent implements OnInit {
     public dialog: MatDialog,
     public servicoService: ServicoService,
     private websocketService: WebsocketService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loadServicos();
@@ -49,9 +49,9 @@ export class ServicoListaComponent implements OnInit {
     this._socketSubscribe.unsubscribe();
   }
 
-  async loadServicos(){
+  async loadServicos() {
     const response: any = await this.servicoService.findAll(this.tableConfig);
-    
+
     this.servicos = response.data;
     this.tableConfig.countData = +response.count;
     console.log(response)
@@ -77,8 +77,8 @@ export class ServicoListaComponent implements OnInit {
   openModalCreate() {
     const dialogRef = this.dialog.open(ServicoFormComponent, {
       autoFocus: false,
-      disableClose: true, 
-      width: '80%',
+      disableClose: true,
+      width: '60%',
       maxHeight: '95%'
     });
 
@@ -94,7 +94,7 @@ export class ServicoListaComponent implements OnInit {
       },
       disableClose: true,
       autoFocus: false,
-      width: '80%',
+      width: '60%',
       maxHeight: '95%',
     });
 

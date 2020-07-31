@@ -149,7 +149,6 @@ export class ListaComponent implements OnInit {
     }
 
     const rigth = +lastPage - (+actualPage + +rangeRigth);
-    console.log(lastPage);
 
     if (+rigth < 1) {
       rangeLeft += (rigth * -1)

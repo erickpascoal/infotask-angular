@@ -14,6 +14,7 @@ import { map, startWith } from 'rxjs/operators';
 export class OrdemServicoFormComponent implements OnInit {
   public formGroup: FormGroup;
   clientes: any = [];
+  servicos: any = [];
   clientesFiltrados: Observable<any[]>;
   isUpdate: boolean;
 
@@ -27,6 +28,24 @@ export class OrdemServicoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClientes();
+
+    this.servicos = [
+      {
+        id: 1,
+        nome: 'comer',
+        descricao: 'asdasdasd'
+      },
+      {
+        id: 2,
+        nome: 'dormir',
+        descricao: 'asdasdasd'
+      },
+      {
+        id: 3,
+        nome: 'beber',
+        descricao: 'asdasdasd'
+      }
+    ];
 
     if (!this.data) {
       this.isUpdate = false;
@@ -82,6 +101,8 @@ export class OrdemServicoFormComponent implements OnInit {
       observacao_tecnico: [ordemServico.observacao_tecnico],
 
       data_saida: [ordemServico.data_saida],
+
+      servico_id: [ordemServico.servico_id],
     });
 
     this.bloqueiaCampos();
@@ -89,11 +110,13 @@ export class OrdemServicoFormComponent implements OnInit {
 
   bloqueiaCampos() {
     if (this.isUpdate) {
-      this.formGroup.controls['cliente_nome'].disable();
+      this.formGroup.controls.cliente_nome.disable();
     }
   }
 
   submit() {
+    console.log(this.formGroup.value);
+
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       if (!this.isUpdate) {
@@ -123,9 +146,7 @@ export class OrdemServicoFormComponent implements OnInit {
 
   async update() {
     try {
-
       await this.ordemServicoService.update(this.formGroup.value);
-
       this.closeModal();
     } catch (error) {
       alert("deu erro")
