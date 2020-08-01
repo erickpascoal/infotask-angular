@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { OrdemServicoFormComponent } from '../ordem-servico-form/ordem-servico-form.component';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
+import { TableConfig } from 'src/app/shared/lista/table-config';
 
 @Component({
   selector: 'app-ordem-servico-lista',
@@ -16,7 +17,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
   ordemServicos: any = [];
   totalOrdemServicos: number;
 
-  public tableConfig = {
+  public tableConfig: TableConfig = {
     columns: [
       { title: "Número", property: "numero", width: '50%', type: 'string' },
       { title: "Status", property: "status", width: 'auto', type: 'string' },
@@ -28,10 +29,14 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
+    topActions: [
+      { label: "Cadastrar", action: "create", icon: "fa fa-plus", position: 'left' },
+    ],
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    createButton: true
+    createButton: true,
+    name: "Ordem de serviço"
   }
 
   public value = true;
@@ -65,15 +70,18 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     this.loadOrdemServicos();
   }
 
-  public handleRowActionTable(rowAction) {
+  public onButtonActionEmmiter(rowAction) {
     switch (rowAction.action) {
       case 'edit':
         this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
         this.openModalDelete(rowAction.rowData);
-      default:
         break;
+      case 'create':
+        this.openModalCreate();
+        break;
+      default: break;
     }
   }
 

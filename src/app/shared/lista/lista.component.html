@@ -1,5 +1,23 @@
-<button *ngIf="listaConfig.createButton" class="button-create" (click)="sendCreateActionEmmiter()"><i class="fa fa-plus"
-        aria-hidden="true"></i></button>
+<div class="topo">
+    <div>
+        <span *ngFor="let action of listaConfig.topActions">
+            <button *ngIf="action.position == 'left'" (click)="onButtonActionClicked(action.action)">
+                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+    <div class="title">
+        <h2>{{listaConfig.name}}</h2>
+    </div>
+    <div class="right">
+        <span *ngFor="let action of listaConfig.topActions">
+            <button *ngIf="action.position == 'right'" (click)="onButtonActionClicked(action.action)">
+                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
 <div class="header-lista">
     <select [(ngModel)]="rowsPerPage" (change)="setRowsPerPage()" title="Registros por página">
         <option value="10">10</option>
@@ -29,7 +47,7 @@
             <p>{{buildValue(dado, columnHead,  columnHead.property)}}</p>
         </td>
         <td class="action-content">
-            <i *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)"
+            <i *ngFor="let action of listaConfig.rowActions" (click)="onButtonActionClicked(action.action, dado)"
                 class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
         </td>
     </tr>

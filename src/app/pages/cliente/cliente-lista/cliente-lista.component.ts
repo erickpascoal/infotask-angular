@@ -5,6 +5,7 @@ import { WebsocketService } from './../../../websocket.service';
 import { ClienteService } from '../cliente.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
+import { TableConfig } from 'src/app/shared/lista/table-config';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -16,22 +17,27 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   clientes: any = [];
   totalClientes: number;
 
-  public tableConfig = {
+  public tableConfig: TableConfig = {
     columns: [
       { title: "Nome", property: "nome", width: 'auto', type: 'string' },
       { title: "CPF", property: "cpf", width: 'auto', type: 'string' },
       { title: "Contato", property: "telefone_principal", width: 'auto', type: 'string' },
       { title: "Cidade", property: "cidade", width: 'auto', type: 'string' },
-      { title: "Ativo", property: "ativo", width: 'auto', type: 'boolean', pipe: 'ativo' }
+      { title: "Ativo", property: "ativo", width: 'auto', type: 'boolean', pipe: 'ativo' },
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
+    topActions: [
+      { label: "Cadastrar", action: "create", icon: "fa fa-plus", position: 'left' },
+      { label: "Importar", action: "import", icon: "fa fa-download", position: 'left' },
+    ],
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    createButton: true
+    createButton: true,
+    name: "Clientes"
   }
 
   private _socketSubscribe: Subscription;
@@ -64,13 +70,17 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     this.loadClientes();
   }
 
-  public handleAction(rowAction) {
+  public onButtonActionEmmiter(rowAction) {
     switch (rowAction.action) {
       case 'edit':
         this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
         this.openModalDelete(rowAction.rowData);
+        break;
+      case 'create':
+        this.openModalCreate();
+        break;
       default: break;
     }
   }

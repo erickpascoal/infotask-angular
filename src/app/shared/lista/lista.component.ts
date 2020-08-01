@@ -15,16 +15,10 @@ export class ListaComponent implements OnInit {
   public dados: [];
 
   @Output()
-  public getDataForPage = new EventEmitter<any>();
-
-  @Output()
-  public rowActionEmmiter = new EventEmitter();
+  public buttonActionEmmiter = new EventEmitter();
 
   @Output()
   public queryEmmiter = new EventEmitter();
-
-  @Output()
-  public createActionEmmiter = new EventEmitter();
 
   public pageList: number[] = [];
 
@@ -43,13 +37,13 @@ export class ListaComponent implements OnInit {
 
   public ngOnChanges(changes: SimpleChanges) { }
 
-  public onRowActionClicked(action: string, rowData: any): void {
+  public onButtonActionClicked(action: string, rowData?: any): void {
     const userAction: any = {
       action: action,
       rowData: rowData
     };
 
-    this.rowActionEmmiter.emit(userAction);
+    this.buttonActionEmmiter.emit(userAction);
   }
 
   public buildValue(data, columnHead, property) {
@@ -127,10 +121,6 @@ export class ListaComponent implements OnInit {
 
   public verificaColunaOrdenada(coluna) {
     return coluna == this.listaConfig.columnSort && this.listaConfig.columnSort.sortDir == 'asc';
-  }
-
-  public sendCreateActionEmmiter() {
-    this.createActionEmmiter.emit();
   }
 
   public rangePagesVisible(page): boolean {

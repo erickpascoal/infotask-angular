@@ -5,6 +5,7 @@ import { ServicoFormComponent } from '../servico-form/servico-form.component';
 import { ServicoService } from '../servico.service';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from './../../../websocket.service';
+import { TableConfig } from 'src/app/shared/lista/table-config';
 
 @Component({
   selector: 'app-servico-lista',
@@ -15,7 +16,7 @@ export class ServicoListaComponent implements OnInit {
   servicos: any = [];
   totalServicos: number;
 
-  public tableConfig = {
+  public tableConfig: TableConfig = {
     columns: [
       { title: "Nome", property: "nome", width: 'auto', type: 'string' },
       { title: "Descrição", property: "descricao", width: 'auto', type: 'string' },
@@ -25,10 +26,14 @@ export class ServicoListaComponent implements OnInit {
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
+    topActions: [
+      { label: "Cadastrar", action: "create", icon: "fa fa-plus", position: 'left' },
+    ],
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    createButton: true
+    createButton: true,
+    name: "Serviços"
   }
 
   private _socketSubscribe: Subscription;
@@ -62,15 +67,18 @@ export class ServicoListaComponent implements OnInit {
     this.loadServicos();
   }
 
-  public handleRowActionTable(rowAction) {
+  public onButtonActionEmmiter(rowAction) {
     switch (rowAction.action) {
       case 'edit':
         this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
         this.openModalDelete(rowAction.rowData);
-      default:
         break;
+      case 'create':
+        this.openModalCreate();
+        break;
+      default: break;
     }
   }
 
