@@ -31,7 +31,6 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     ],
     topActions: [
       { label: "Cadastrar", action: "create", icon: "fa fa-plus", position: 'left' },
-      { label: "Importar", action: "import", icon: "fa fa-download", position: 'left' },
     ],
     rowsPerPage: 10,
     page: 1,
