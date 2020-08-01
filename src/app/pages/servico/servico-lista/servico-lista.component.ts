@@ -32,7 +32,6 @@ export class ServicoListaComponent implements OnInit {
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    createButton: true,
     name: "Serviços"
   }
 

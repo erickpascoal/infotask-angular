@@ -35,7 +35,6 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    createButton: true,
     name: "Clientes"
   }
 

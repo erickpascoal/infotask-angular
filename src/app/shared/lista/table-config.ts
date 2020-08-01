@@ -9,6 +9,5 @@ export class TableConfig {
     rowsPerPage: number;
     page: number;
     countData: number;
-    createButton: boolean;
     name: string;
 }
