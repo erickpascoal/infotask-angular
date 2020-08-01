@@ -18,7 +18,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
 
   public tableConfig = {
     columns: [
-      { title: "Número", property: "numero", width: 'auto', type: 'string' },
+      { title: "Número", property: "numero", width: '50%', type: 'string' },
       { title: "Status", property: "status", width: 'auto', type: 'string' },
       { title: "Cliente", property: "cliente_nome", width: 'auto', type: 'string' },
       { title: "Data Entrada", property: "data_entrada", width: '1%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm" },

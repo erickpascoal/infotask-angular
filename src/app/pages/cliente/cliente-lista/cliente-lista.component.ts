@@ -18,7 +18,7 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   public tableConfig = {
     columns: [
-      { title: "Cliente", property: "nome", width: 'auto', type: 'string' },
+      { title: "Nome", property: "nome", width: 'auto', type: 'string' },
       { title: "CPF", property: "cpf", width: 'auto', type: 'string' },
       { title: "Contato", property: "telefone_principal", width: 'auto', type: 'string' },
       { title: "Cidade", property: "cidade", width: 'auto', type: 'string' },
@@ -26,6 +26,8 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
+      { label: "Deletar", action: "delete", icon: "fa fa-trash" },
+      { label: "Deletar", action: "delete", icon: "fa fa-trash" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
     rowsPerPage: 10,

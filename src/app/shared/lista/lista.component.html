@@ -12,29 +12,28 @@
 </div>
 
 
-<div class="list">
-    <a>
-        <div class="header-column" *ngFor="let columnHead of listaConfig.columns"
+<table>
+    <tr>
+        <th class="header-column" width="{{columnHead.width}}" *ngFor="let columnHead of listaConfig.columns"
             (click)="onClickHeaderColumn(columnHead)">
             <p> {{ columnHead.title }} </p>
             <!-- <i *ngIf="!verificaColunaOrdenada(columnHead)" class="fa fa-arrow-up header-icon-order"></i>
             <i *ngIf="verificaColunaOrdenada(columnHead)" class="fa fa-arrow-down header-icon-order"></i> -->
-        </div>
-        <div class="action-header">
+        </th>
+        <th class="action-header">
             <p> Ações</p>
-        </div>
-    </a>
-    <a *ngFor="let dado of dados">
-        <div class="content-column" *ngFor="let columnHead of listaConfig.columns">
+        </th>
+    </tr>
+    <tr *ngFor="let dado of dados">
+        <td class="content-column" *ngFor="let columnHead of listaConfig.columns">
             <p>{{buildValue(dado, columnHead,  columnHead.property)}}</p>
-        </div>
-        <div class="action-content">
-            <div *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)">
-                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
-            </div>
-        </div>
-    </a>
-</div>
+        </td>
+        <td class="action-content">
+            <i *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)"
+                class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+        </td>
+    </tr>
+</table>
 
 <div class="pagination">
     <a [ngClass]="{ 'invisible' : listaConfig.page == 1 }" (click)="onClickPreviusPage()">&laquo;</a>
