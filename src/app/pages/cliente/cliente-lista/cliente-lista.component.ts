@@ -27,8 +27,6 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
-      { label: "Deletar", action: "delete", icon: "fa fa-trash" },
-      { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
     rowsPerPage: 10,
     page: 1,
