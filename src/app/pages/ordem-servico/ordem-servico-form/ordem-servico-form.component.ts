@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../cliente/cliente.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ServicoService } from '../../servico/servico.service';
 
 @Component({
   selector: 'app-ordem-servico-form',
@@ -24,28 +25,30 @@ export class OrdemServicoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ordemServicoService: OrdemServicoService,
     private clienteService: ClienteService,
+    private servicoService: ServicoService
   ) { }
 
   ngOnInit(): void {
     this.loadClientesAtivos();
+    this.loadServicosAtivos();
 
-    this.servicos = [
-      {
-        id: 1,
-        nome: 'comer',
-        descricao: 'asdasdasd'
-      },
-      {
-        id: 2,
-        nome: 'dormir',
-        descricao: 'asdasdasd'
-      },
-      {
-        id: 3,
-        nome: 'beber',
-        descricao: 'asdasdasd'
-      }
-    ];
+    // this.servicos = [
+    //   {
+    //     id: 1,
+    //     nome: 'comer',
+    //     descricao: 'asdasdasd'
+    //   },
+    //   {
+    //     id: 2,
+    //     nome: 'dormir',
+    //     descricao: 'asdasdasd'
+    //   },
+    //   {
+    //     id: 3,
+    //     nome: 'beber',
+    //     descricao: 'asdasdasd'
+    //   }
+    // ];
 
     if (!this.data) {
       this.isUpdate = false;
@@ -115,6 +118,8 @@ export class OrdemServicoFormComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.formGroup.value);
+    
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       if (!this.isUpdate) {
@@ -128,11 +133,14 @@ export class OrdemServicoFormComponent implements OnInit {
   async create() {
     try {
       const cliente = this.clientes.find(c => c.nome == this.formGroup.value.cliente_nome);
+
       const ordemServico = this.formGroup.value;
       ordemServico.cliente_id = cliente.id;
       ordemServico.cliente_nome = cliente.nome;
       ordemServico.cliente_cpf = cliente.cpf;
+      ordemServico.servico_id = +this.formGroup.value.servico_id;
 
+      console.log(ordemServico)
       await this.ordemServicoService.create(ordemServico);
 
       this.closeModal();
@@ -158,5 +166,11 @@ export class OrdemServicoFormComponent implements OnInit {
     const response: any = await this.clienteService.findAllAtivos();
 
     this.clientes = response.data;
+  }
+
+  async loadServicosAtivos() {
+    const response: any = await this.servicoService.findAtivos();
+
+    this.servicos = response.data;
   }
 }

@@ -83,7 +83,7 @@ export class ClienteFormComponent implements OnInit {
 
       await this.clienteService.create(cliente);
 
-      console.log(cliente);
+      console.log(cliente)
 
       this.closeModal();
     } catch (error) {

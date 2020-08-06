@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ServicoFormComponent } from '../servico-form/servico-form.component';
-import { ServicoService } from '../servico.service';
-import { Subscription } from 'rxjs';
 import { WebsocketService } from './../../../websocket.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TipoServicoService } from '../tipo-servico.service';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { TipoServicoFormComponent } from '../tipo-servico-form/tipo-servico-form.component';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { TableConfig } from 'src/app/shared/lista/table-config';
 
 @Component({
-  selector: 'app-servico-lista',
-  templateUrl: './servico-lista.component.html',
-  styleUrls: ['./servico-lista.component.scss']
+  selector: 'app-tipo-servico-list',
+  templateUrl: './tipo-servico-list.component.html',
+  styleUrls: ['./tipo-servico-list.component.scss']
 })
-export class ServicoListaComponent implements OnInit {
-  servicos: any = [];
+export class TipoServicoListComponent implements OnInit {
+  tiposDeServico: any = [];
   totalServicos: number;
 
   public tableConfig: TableConfig = {
@@ -32,38 +32,35 @@ export class ServicoListaComponent implements OnInit {
     rowsPerPage: 10,
     page: 1,
     countData: 0,
-    name: "Serviços"
+    name: "Tipos de Serviço"
   }
 
   private _socketSubscribe: Subscription;
 
-
   constructor(
     public dialog: MatDialog,
-    public servicoService: ServicoService,
+    public tipoServicoService: TipoServicoService,
     private websocketService: WebsocketService,
   ) { }
 
   ngOnInit(): void {
-    this.loadServicos();
-    this._socketSubscribe = this.websocketService.listen('servico').subscribe(response => this.atualizaLista(response));
+    this.loadTiposServico();
+    this._socketSubscribe = this.websocketService.listen('tipoServico').subscribe(response => this.atualizaLista(response));
   }
 
   ngOnDestroy(): void {
     this._socketSubscribe.unsubscribe();
   }
 
-  async loadServicos() {
-    const response: any = await this.servicoService.findAll(this.tableConfig);
-
-    this.servicos = response.data;
+  async loadTiposServico() {
+    const response: any = await this.tipoServicoService.findAll(this.tableConfig);
+    this.tiposDeServico = response.data;
     this.tableConfig.countData = +response.count;
-    console.log(response.data)
   }
 
   public buildQuery(tableConfigToSend) {
     this.tableConfig = tableConfigToSend;
-    this.loadServicos();
+    this.loadTiposServico();
   }
 
   public onButtonActionEmmiter(rowAction) {
@@ -82,7 +79,7 @@ export class ServicoListaComponent implements OnInit {
   }
 
   openModalCreate() {
-    const dialogRef = this.dialog.open(ServicoFormComponent, {
+    const dialogRef = this.dialog.open(TipoServicoFormComponent, {
       autoFocus: false,
       disableClose: true,
       width: '60%',
@@ -94,10 +91,10 @@ export class ServicoListaComponent implements OnInit {
     });
   }
 
-  openModalUpdate(servico) {
-    const dialogRef = this.dialog.open(ServicoFormComponent, {
+  openModalUpdate(tipoServico) {
+    const dialogRef = this.dialog.open(TipoServicoFormComponent, {
       data: {
-        servico
+        tipoServico
       },
       disableClose: true,
       autoFocus: false,
@@ -110,11 +107,11 @@ export class ServicoListaComponent implements OnInit {
     });
   }
 
-  openModalDelete(servico) {
+  openModalDelete(tipoServico) {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         title: 'Deletar',
-        message: `Deseja realmente deletar [${servico.nome}] ?`,
+        message: `Deseja realmente deletar [${tipoServico.nome}] ?`,
         labelButtonCancel: 'Cancelar',
         labelButtonSubmit: 'Deletar'
       },
@@ -124,7 +121,7 @@ export class ServicoListaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'confirm') {
-        this.servicoService.delete(servico);
+        this.tipoServicoService.delete(tipoServico);
       }
     });
   }
@@ -133,19 +130,21 @@ export class ServicoListaComponent implements OnInit {
     if (event) {
       switch (event.action) {
         case 'create':
-          this.servicos.unshift(event.servico)
+          this.tiposDeServico.unshift(event.tipoServico)
           break;
         case 'update':
-          const index = this.servicos.findIndex(m => m.id == event.servico.id);
-          this.servicos[index] = event.servico;
+          const index = this.tiposDeServico.findIndex(m => m.id == event.tipoServico.id);
+          this.tiposDeServico[index] = event.tipoServico;
           break;
         case 'delete':
-          const indexDelete = this.servicos.findIndex(m => m.id == event.servico.id);
-          this.servicos.splice(indexDelete, 1);
+          const indexDelete = this.tiposDeServico.findIndex(m => m.id == event.tipoServico.id);
+          this.tiposDeServico.splice(indexDelete, 1);
           break;
         default:
           break;
       }
+
+      console.log()
     }
   }
 }

@@ -48,7 +48,9 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadClientes();
-    this._socketSubscribe = this.websocketService.listen('cliente').subscribe(response => this.atualizarListaClientes(response));
+    // this._socketSubscribe = this.websocketService.listen('cliente').subscribe(response => this.atualizarListaClientes(response));
+    this._socketSubscribe = this.websocketService.listen('cliente').subscribe(response => console.log(response));
+    // console.log(this._socketSubscribe)
   }
 
   ngOnDestroy(): void {

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicoService {
+export class TipoServicoService {
 
   constructor(private http: HttpClient) { }
 
@@ -19,25 +19,25 @@ export class ServicoService {
       httpParams = httpParams.append("tableConfig", JSON.stringify(tableConfig));
     }
 
-    return this.http.get(`${this.url}/servico`, {
+    return this.http.get(`${this.url}/tipoServico`, {
       headers: null,
       params: httpParams
     }).toPromise();
   }
 
   findAtivos() {
-    return this.http.get(`${this.url}/servico/ativos`).toPromise();
+    return this.http.get(`${this.url}/tipoServico/ativos`).toPromise();
   }
 
-  create(servico: any) {
-    return this.http.post(`${this.url}/servico`, servico).toPromise();
+  create(tipoServico: any) {
+    return this.http.post(`${this.url}/tipoServico`, tipoServico).toPromise();
   }
 
-  update(servico: any) {
-    return this.http.put(`${this.url}/servico/${servico.id}`, servico).toPromise();
+  update(tipoServico: any) {
+    return this.http.put(`${this.url}/tipoServico/${tipoServico.id}`, tipoServico).toPromise();
   }
 
-  delete(servico: any) {
-    return this.http.delete(`${this.url}/servico/${servico.id}`).toPromise();
+  delete(tipoServico: any) {
+    return this.http.delete(`${this.url}/tipoServico/${tipoServico.id}`).toPromise();
   }
 }

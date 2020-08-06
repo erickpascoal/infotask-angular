@@ -20,6 +20,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ServicoListaComponent } from './pages/servico/servico-lista/servico-lista.component';
 import { ServicoFormComponent } from './pages/servico/servico-form/servico-form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { TipoServicoListComponent } from './pages/tipo-servico/tipo-servico-list/tipo-servico-list.component';
+import { TipoServicoFormComponent } from './pages/tipo-servico/tipo-servico-form/tipo-servico-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     OrdemServicoFormComponent,
     ServicoListaComponent,
     ServicoFormComponent,
+    TipoServicoListComponent,
+    TipoServicoFormComponent,
   ],
   imports: [
     BrowserModule,
