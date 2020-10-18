@@ -1,3 +1,23 @@
+<div class="topo">
+    <div>
+        <span *ngFor="let action of listaConfig.topActions">
+            <button *ngIf="action.position == 'left'" (click)="onButtonActionClicked(action.action)">
+                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+    <div class="title">
+        <h2>{{listaConfig.name}}</h2>
+    </div>
+    <div class="right">
+        <span *ngFor="let action of listaConfig.topActions">
+            <button *ngIf="action.position == 'right'" (click)="onButtonActionClicked(action.action)">
+                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
 <div class="header-lista">
     <select [(ngModel)]="rowsPerPage" (change)="setRowsPerPage()" title="Registros por página">
         <option value="10">10</option>
@@ -6,39 +26,39 @@
         <option value="100">100</option>
     </select>
     <input [(ngModel)]="search" (keyup.enter)="onEnterSearch()" type="text" placeholder="Pesquisa">
-    <button (click)="onEnterSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <button class="button-find" (click)="onEnterSearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
 </div>
 
-<div class="list">
-    <div class="header-column">
-        <div class="header-column" *ngFor="let columnHead of listaConfig.columns"
+
+<table>
+    <tr>
+        <th class="header-column" width="{{columnHead.width}}" *ngFor="let columnHead of listaConfig.columns"
             (click)="onClickHeaderColumn(columnHead)">
-            <strong> {{ columnHead.title }} </strong>
+            <p> {{ columnHead.title }} </p>
             <!-- <i *ngIf="!verificaColunaOrdenada(columnHead)" class="fa fa-arrow-up header-icon-order"></i>
             <i *ngIf="verificaColunaOrdenada(columnHead)" class="fa fa-arrow-down header-icon-order"></i> -->
-
-        </div>
-        <div class="action-header">
-            <strong> Ações</strong>
-        </div>
-
-    </div>
-    <a *ngFor="let dado of dados">
-        <div class="content-column" *ngFor="let columnHead of listaConfig.columns">
+        </th>
+        <th class="action-header">
+            <p> Ações</p>
+        </th>
+    </tr>
+    <tr *ngFor="let dado of dados">
+        <td class="content-column" *ngFor="let columnHead of listaConfig.columns">
             <p>{{buildValue(dado, columnHead,  columnHead.property)}}</p>
-        </div>
-        <div class="action-row">
-            <div *ngFor="let action of listaConfig.rowActions" (click)="onRowActionClicked(action.action, dado)">
-                <i class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
-            </div>
-        </div>
-    </a>
-</div>
+        </td>
+        <td class="action-content">
+            <i *ngFor="let action of listaConfig.rowActions" (click)="onButtonActionClicked(action.action, dado)"
+                class="{{action.icon}}" title="{{action.label}}" aria-hidden="true"></i>
+        </td>
+    </tr>
+</table>
 
 <div class="pagination">
     <a [ngClass]="{ 'invisible' : listaConfig.page == 1 }" (click)="onClickPreviusPage()">&laquo;</a>
-    <a *ngFor="let page of getPages()" [ngClass]="{'active': page == listaConfig.page}"
-        (click)="setPage(page)">{{page}}</a>
+    <div *ngFor="let page of getPages()">
+        <a *ngIf="rangePagesVisible(page)" [ngClass]="{'active': page == listaConfig.page}"
+            (click)="setPage(page)">{{page}}</a>
+    </div>
     <a [ngClass]="{ 'invisible' : listaConfig.page == totalPages || listaConfig.countData == 0 }"
         (click)="onClickNextPage()">&raquo;</a>
 </div>

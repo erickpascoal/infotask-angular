@@ -15,15 +15,12 @@ export class ListaComponent implements OnInit {
   public dados: [];
 
   @Output()
-  public getDataForPage = new EventEmitter<any>();
-
-  @Output()
-  public rowActionEmmiter = new EventEmitter();
+  public buttonActionEmmiter = new EventEmitter();
 
   @Output()
   public queryEmmiter = new EventEmitter();
 
-  public pageList: number[];
+  public pageList: number[] = [];
 
   public search: string;
 
@@ -40,25 +37,27 @@ export class ListaComponent implements OnInit {
 
   public ngOnChanges(changes: SimpleChanges) { }
 
-  public onRowActionClicked(action: string, rowData: any): void {
+  public onButtonActionClicked(action: string, rowData?: any): void {
     const userAction: any = {
       action: action,
       rowData: rowData
     };
 
-    this.rowActionEmmiter.emit(userAction);
+    this.buttonActionEmmiter.emit(userAction);
   }
 
   public buildValue(data, columnHead, property) {
     const pipe: string = columnHead.pipe;
     const value = data[property];
 
-    if (!pipe || !value) {
+    if (!pipe || value == null || value == undefined) {
       return value;
     } else {
       if (pipe.indexOf('date') >= 0) {
         const format = pipe.replace('date:', '');
         return moment(value).format(format);
+      } else if (pipe.indexOf('ativo') >= 0) {
+        return value === true ? 'SIM' : 'NÃO'
       }
     }
   }
@@ -122,5 +121,35 @@ export class ListaComponent implements OnInit {
 
   public verificaColunaOrdenada(coluna) {
     return coluna == this.listaConfig.columnSort && this.listaConfig.columnSort.sortDir == 'asc';
+  }
+
+  public rangePagesVisible(page): boolean {
+    let rangeRigth = 4;
+    let rangeLeft = 4;
+    const actualPage = this.listaConfig.page;
+    const lastPage = this.getPages()[this.getPages().length - 1];
+
+    if (page == this.listaConfig.page) {
+      return true;
+    }
+
+    const left = actualPage - rangeLeft;
+    if (left < 1) {
+      rangeRigth += (left * -1 + 1)
+    }
+
+    const rigth = +lastPage - (+actualPage + +rangeRigth);
+
+    if (+rigth < 1) {
+      rangeLeft += (rigth * -1)
+    }
+
+    if (page > this.listaConfig.page && page <= (actualPage + rangeRigth)) {
+      return true;
+    }
+
+    if (page < this.listaConfig.page && page >= (actualPage - rangeLeft)) {
+      return true;
+    }
   }
 }

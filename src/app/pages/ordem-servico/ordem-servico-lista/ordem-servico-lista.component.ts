@@ -2,6 +2,10 @@ import { WebsocketService } from './../../../websocket.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrdemServicoService } from '../ordem-servico.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { OrdemServicoFormComponent } from '../ordem-servico-form/ordem-servico-form.component';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
+import { TableConfig } from 'src/app/shared/lista/table-config';
 
 @Component({
   selector: 'app-ordem-servico-lista',
@@ -12,27 +16,37 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
 
   ordemServicos: any = [];
   totalOrdemServicos: number;
-  openModalForm = false;
-  ordemServicoSelected;
-  public tableConfig = {
+
+  public tableConfig: TableConfig = {
     columns: [
-      { title: "Número", property: "numero", width: 'auto', type: 'string' },
-      { title: "Situação", property: "situacao", width: 'auto', type: 'string' },
-      { title: "Data Entrada", property: "data_entrada", width: '12%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm", },
-      { title: "Data Saída", property: "data_saida", width: '12%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm", },
+      { title: "Número", property: "numero", width: '50%', type: 'string' },
+      { title: "Status", property: "status", width: 'auto', type: 'string' },
+      { title: "Cliente", property: "cliente_nome", width: 'auto', type: 'string' },
+      { title: "Data Entrada", property: "data_entrada", width: '1%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm" },
+      { title: "Data Saída", property: "data_saida", width: '1%', type: 'date', pipe: "date: DD/MM/YYYY HH:mm" },
     ],
     rowActions: [
       { label: "Editar", action: "edit", icon: "fa fa-pencil" },
       { label: "Deletar", action: "delete", icon: "fa fa-trash" },
     ],
+    topActions: [
+      { label: "Cadastrar", action: "create", icon: "fa fa-plus", position: 'left' },
+    ],
     rowsPerPage: 10,
     page: 1,
     countData: 0,
+    name: "Ordem de serviço"
   }
+
+  public value = true;
 
   private _socketSubscribe: Subscription;
 
-  constructor(private ordemServicoService: OrdemServicoService, private websocketService: WebsocketService) { }
+  constructor(
+    private ordemServicoService: OrdemServicoService,
+    private websocketService: WebsocketService,
+    public dialog: MatDialog
+  ) { }
 
 
   ngOnInit(): void {
@@ -55,34 +69,19 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
     this.loadOrdemServicos();
   }
 
-  public handkeRowActionTable(rowAction) {
+  public onButtonActionEmmiter(rowAction) {
     switch (rowAction.action) {
       case 'edit':
-        this.openEditModal(rowAction.rowData);
+        this.openModalUpdate(rowAction.rowData);
         break;
       case 'delete':
-        this.ordemServicoService.delete(rowAction.rowData);
-      default:
+        this.openModalDelete(rowAction.rowData);
         break;
+      case 'create':
+        this.openModalCreate();
+        break;
+      default: break;
     }
-  }
-
-  closeOrdemServicoForm() {
-    this.openModalForm = false
-  }
-
-  openCadastrarOrdemServico() {
-    this.ordemServicoSelected = null;
-    this.openModalForm = true;
-  }
-
-  openEditModal(ordemServico) {
-    this.ordemServicoSelected = ordemServico;
-    this.openModalForm = true;
-  }
-
-  openDeleteModal(ordemServico) {
-    this.ordemServicoSelected = ordemServico;
   }
 
   public atualizaLista(event) {
@@ -92,7 +91,7 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
           this.ordemServicos.unshift(event.ordemServico)
           break;
         case 'update':
-          const index = this.ordemServicos.findIndex(m => m.id === event.ordemServico.id);
+          const index = this.ordemServicos.findIndex(m => m.id == event.ordemServico.id);
           this.ordemServicos[index] = event.ordemServico;
           break;
         case 'delete':
@@ -103,5 +102,53 @@ export class OrdemServicoListaComponent implements OnInit, OnDestroy {
           break;
       }
     }
+  }
+
+  openModalCreate() {
+    const dialogRef = this.dialog.open(OrdemServicoFormComponent, {
+      autoFocus: false,
+      disableClose: true,
+      width: '80%',
+      maxHeight: '95%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openModalUpdate(ordemServico) {
+    const dialogRef = this.dialog.open(OrdemServicoFormComponent, {
+      data: {
+        ordemServico
+      },
+      disableClose: true,
+      autoFocus: false,
+      width: '80%',
+      maxHeight: '95%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openModalDelete(ordemServico) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Deletar',
+        message: `Deseja realmente deletar [${ordemServico.numero}] ? `,
+        labelButtonCancel: 'Cancelar',
+        labelButtonSubmit: 'Deletar'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'confirm') {
+        this.ordemServicoService.delete(ordemServico);
+      }
+    });
   }
 }

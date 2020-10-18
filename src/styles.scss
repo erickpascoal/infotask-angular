@@ -1,44 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
-.button {
-    background-color: #4CAF50; 
-    border: none;
-    color: white;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-
-  *{
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
 
-body {
-    background: #f0f0f5;
-    -webkit-font-smoothing: antialiased;
+html, body {
+  background: #f0f0f5;
+  -webkit-font-smoothing: antialiased;
 }
 
-body, input, button {
-font: 16px Roboto, sans-serif;
+body, input, button, a {
+  font: 16px Roboto, sans-serif;
 }
 
 a, button {
-    cursor: pointer;
+  cursor: pointer;
 }
-
-#root {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-
-
-
